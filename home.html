@@ -295,7 +295,7 @@ html[data-look=night] [data-p=cart] .cb{background:linear-gradient(180deg,#20163
 .pbk{position:fixed;left:50%;transform:translateX(-50%);bottom:96px;z-index:110;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:16px;padding:12px 16px;font:600 14px Inter,sans-serif;box-shadow:0 18px 40px -16px rgba(0,0,0,.5);max-width:92vw;text-align:center}
 .pbk[hidden]{display:none}.pbk button{background:none;border:0;color:var(--deep);font:700 14px Inter,sans-serif;cursor:pointer;margin-left:8px;text-decoration:underline}
 
-/* ===== v11: 5-hour offer ===== */
+/* ===== v11: limited-time offer ===== */
 .ofbar{display:none;background:linear-gradient(90deg,#4A1D7A,#8E5CD9 55%,#E0489C);color:#fff;text-align:center;padding:10px 14px;font:700 14.5px Inter,sans-serif;position:relative;z-index:5}
 body.ofon .ofbar{display:flex;flex-wrap:wrap;gap:6px 12px;justify-content:center;align-items:center}body.ofon #bn{display:none}
 .ofbar s{opacity:.75}.ofT{white-space:nowrap;background:#fff;color:#4A1D7A;border-radius:8px;padding:3px 9px;font-variant-numeric:tabular-nums;letter-spacing:.04em;font-weight:800}
@@ -699,20 +699,20 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")$("#pre").hidden=tru
 document.addEventListener("visibilitychange",()=>{if(!document.hidden&&pWent){pWent=false;$("#pbk").hidden=false;setTimeout(()=>{$("#pbk").hidden=true},12000)}});
 $("#phelp").onclick=()=>{$("#pbk").hidden=true;vOpen(true)};
 
-/* ===== v11: 5-hour offer, starts when offer.json is committed ===== */
+/* ===== v11: limited-time offer, starts when offer.json is committed ===== */
 const OF={url:"https://paystack.shop/pay/r3x-g29v2a",orig:HBUN.pay};const ctOrig=CT.interactive[1];let ofEnd=0,ofOff=0,ofIv=0,heroTxt=null;
 const ofLeft=()=>ofEnd-(Date.now()+ofOff);
-$("#bn").insertAdjacentHTML("beforebegin",'<section class="ofp" id="ofpanel" aria-label="Limited-time offer"><div class="ofk">⏳ LIMITED 5-HOUR OFFER</div><h2>All 7 interactive platforms for <b>KSh 1,500</b></h2><p><s>KSh 2,000</s> · 25% off · you save KSh 1,293 compared with buying separately</p><div class="ofd" role="timer" aria-label="Time left"><div><b id="ofh">00</b><span>Hours</span></div><i>:</i><div><b id="ofm">00</b><span>Minutes</span></div><i>:</i><div><b id="ofs">00</b><span>Seconds</span></div></div><p class="ofe" id="ofe"></p><button class="ofgo" onclick="cat(\'interactive\')">Get the offer now</button></section>');
+$("#bn").insertAdjacentHTML("beforebegin",'<section class="ofp" id="ofpanel" aria-label="Limited-time offer"><div class="ofk">⏳ LIMITED-TIME OFFER</div><h2>All 7 interactive platforms for <b>KSh 1,500</b></h2><p><s>KSh 2,000</s> · 25% off · you save KSh 1,293 compared with buying separately</p><div class="ofd" role="timer" aria-label="Time left"><div><b id="ofh">00</b><span>Hours</span></div><i>:</i><div><b id="ofm">00</b><span>Minutes</span></div><i>:</i><div><b id="ofs">00</b><span>Seconds</span></div></div><p class="ofe" id="ofe"></p><button class="ofgo" onclick="cat(\'interactive\')">Get the offer now</button></section>');
 const _ft=feat;feat=function(){if(!(ofEnd&&ofLeft()>0))return _ft();
- return`<div class="bundle"><span class="bbadge">⏳ 5-hour offer · save KSh 1,293</span><div><div class="st">Premium bundle · all 7 units</div><h3>The Complete Nurse Vault Collection</h3><p>One all-inclusive interactive platform for every unit. Everything is inside, so you don't need to buy any PDFs.</p><ul class="bl"><li>All 7 units, opened on any phone or laptop with your password</li><li>High-yield notes, MCQs and SAQs in one place</li><li>Progress tracking as you revise</li><li>No separate PDFs to buy</li></ul><p class="bnote">${SUBJ.map(k=>S[k].sn).join(" · ")}</p></div><div class="bbody2"><div class="bpr"><b>KSh 1,500</b></div><div class="bper">Usually KSh 2,000 · that is 25% off</div><div class="bsave">You save KSh 1,293 compared with buying all 7 separately</div>${hbtn(HBUN,"Get the offer · KSh 1,500")}<p class="bnote">About KSh 214 per unit. Pay securely with M-Pesa via Paystack.</p></div></div>`};
+ return`<div class="bundle"><span class="bbadge">⏳ limited-time offer · save KSh 1,293</span><div><div class="st">Premium bundle · all 7 units</div><h3>The Complete Nurse Vault Collection</h3><p>One all-inclusive interactive platform for every unit. Everything is inside, so you don't need to buy any PDFs.</p><ul class="bl"><li>All 7 units, opened on any phone or laptop with your password</li><li>High-yield notes, MCQs and SAQs in one place</li><li>Progress tracking as you revise</li><li>No separate PDFs to buy</li></ul><p class="bnote">${SUBJ.map(k=>S[k].sn).join(" · ")}</p></div><div class="bbody2"><div class="bpr"><b>KSh 1,500</b></div><div class="bper">Usually KSh 2,000 · that is 25% off</div><div class="bsave">You save KSh 1,293 compared with buying all 7 separately</div>${hbtn(HBUN,"Get the offer · KSh 1,500")}<p class="bnote">About KSh 214 per unit. Pay securely with M-Pesa via Paystack.</p></div></div>`};
 function ofTick(){const l=ofLeft();if(l<=0){clearInterval(ofIv);ofApply(false);return}
  const p=n=>String(n).padStart(2,"0");$("#ofh").textContent=p(Math.floor(l/36e5));$("#ofm").textContent=p(Math.floor(l%36e5/6e4));$("#ofs").textContent=p(Math.floor(l%6e4/1e3))}
-function ofApply(on){HBUN.pay=on?OF.url:OF.orig;document.body.classList.toggle("ofon",on);VT[1]=on?"⏳ 5-hour offer: all 7 for KSh 1,500":"⚡ The premium bundle saves KSh "+HS;
- $$("button.btn").forEach(b=>{if(on&&b.textContent.includes("save KSh 793")){heroTxt=b.textContent;b.textContent="⏳ Get the 5-hour offer · KSh 1,500"}else if(!on&&heroTxt&&b.textContent.includes("5-hour offer")){b.textContent=heroTxt}});
- CT.interactive[1]=on?"Complete interactive platforms for each unit, KSh 399 each, or all seven for KSh 1,500 during the 5-hour offer.":ctOrig;
+function ofApply(on){HBUN.pay=on?OF.url:OF.orig;document.body.classList.toggle("ofon",on);VT[1]=on?"⏳ limited-time offer: all 7 for KSh 1,500":"⚡ The premium bundle saves KSh "+HS;
+ $$("button.btn").forEach(b=>{if(on&&b.textContent.includes("save KSh 793")){heroTxt=b.textContent;b.textContent="⏳ Get the limited-time offer · KSh 1,500"}else if(!on&&heroTxt&&b.textContent.includes("limited-time offer")){b.textContent=heroTxt}});
+ CT.interactive[1]=on?"Complete interactive platforms for each unit, KSh 399 each, or all seven for KSh 1,500 during the limited-time offer.":ctOrig;
  if(on)$("#ofe").textContent="Offer ends "+new Date(ofEnd).toLocaleString("en-KE",{weekday:"long",hour:"numeric",minute:"2-digit",timeZone:"Africa/Nairobi"})+" (Nairobi time)";
  renderGrids();if(on)ofTick()}
-const OFFER_END="2026-11-21T23:20:00+03:00";
+const OFFER_END="2026-11-22T04:00:00+03:00";
 async function ofInit(){let end=Date.parse(OFFER_END),off=0;
  try{const h=await fetch(location.href.split("#")[0],{method:"HEAD",cache:"no-store"}),d=Date.parse(h.headers.get("Date")||"");if(d)off=d-Date.now()}catch(e){}
  try{const r=await fetch("offer.json?"+Date.now(),{cache:"no-store"});if(r.ok){const j=await r.json();if(j.off)end=0;else if(j.end&&Date.parse(j.end))end=Date.parse(j.end)}}catch(e){}
