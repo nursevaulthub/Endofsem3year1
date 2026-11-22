@@ -712,7 +712,7 @@ function ofApply(on){HBUN.pay=on?OF.url:OF.orig;document.body.classList.toggle("
  CT.interactive[1]=on?"Complete interactive platforms for each unit, KSh 399 each, or all seven for KSh 1,500 during the limited-time offer.":ctOrig;
  if(on)$("#ofe").textContent="Offer ends "+new Date(ofEnd).toLocaleString("en-KE",{weekday:"long",hour:"numeric",minute:"2-digit",timeZone:"Africa/Nairobi"})+" (Nairobi time)";
  renderGrids();if(on)ofTick()}
-const OFFER_END="2026-11-22T04:00:00+03:00";
+const OFFER_END="2026-11-22T15:55:00+03:00";
 async function ofInit(){let end=Date.parse(OFFER_END),off=0;
  try{const h=await fetch(location.href.split("#")[0],{method:"HEAD",cache:"no-store"}),d=Date.parse(h.headers.get("Date")||"");if(d)off=d-Date.now()}catch(e){}
  try{const r=await fetch("offer.json?"+Date.now(),{cache:"no-store"});if(r.ok){const j=await r.json();if(j.off)end=0;else if(j.end&&Date.parse(j.end))end=Date.parse(j.end)}}catch(e){}
